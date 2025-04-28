@@ -1,1 +1,94 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@font-face {
+	font-family: 'JetBrainsMonoNerdFont';
+	src: url('/fonts/JetBrainsMonoNerdFont-Bold.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+:root {
+	--foreground-rgb: 0, 0, 0;
+	--background-rgb: 0, 0, 0;
+}
+
+body {
+	color: rgb(var(--foreground-rgb));
+	background: rgb(var(--background-rgb));
+	font-family: 'JetBrainsMonoNerdFont', monospace;
+}
+
+/* Custom scrollbar for the terminal */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	display: none;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #4ade80;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #3bcc6c;
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+}
+
+.cursor-blink {
+	animation: blink 1s step-end infinite;
+}
+
+ul {
+	list-style: none;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+li {
+	display: grid;
+	grid-template-columns: auto 1fr; /* Column for marker, column for text taking rest of space*/
+	gap: 0.5em;          /* Space between marker and text */
+	align-items: start;  /* Align items to the top */
+	margin-bottom: 0.5em;
+}
+
+li::before {
+	content: "•";
+	font-weight: bold;
+	/* No special positioning needed, grid handles it */
+}
+
+/* Numbered lists (ol) */
+ol {
+	list-style: none;
+	padding-left: 0;
+	margin-left: 0;
+	counter-reset: list-item;
+}
+
+ol li {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 0.5em;
+	align-items: start;
+	margin-bottom: 0.5em;
+}
+
+ol li::before {
+	counter-increment: list-item;
+	content: counter(list-item) ".";
+	text-align: right; /* Useful if numbers vary in width */
+}

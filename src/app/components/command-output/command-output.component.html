@@ -1,0 +1,98 @@
+@switch (node().element) {
+	@case ("div") {
+		<div [ngClass]="node().className">
+			@if (shouldRenderText) {
+				{{ node().innerText }}
+			}
+			@if (shouldRenderChildren) {
+				@for (child of node().children; track $index) {
+					<app-command-output [node]="child"/>
+				}
+			}
+		</div>
+	}
+	@case ('span') {
+		<span [ngClass]="node().className">
+			@if (shouldRenderText) {
+				{{ node().innerText }}
+			}
+			@if (shouldRenderChildren) {
+				@for (child of node().children; track $index) {
+					<app-command-output [node]="child"/>
+				}
+			}
+		</span>
+	}
+	@case ('p') {
+		<p [ngClass]="node().className">
+			@if (shouldRenderText) {
+				{{ node().innerText }}
+			}
+			@if (shouldRenderChildren) {
+				@for (child of node().children; track $index) {
+					<app-command-output [node]="child"/>
+				}
+			}
+		</p>
+	}
+	@case ('pre') {
+		<pre [ngClass]="node().className">
+		    @if (shouldRenderText) {
+			    {{ node().innerText }}
+		    }
+			@if (shouldRenderChildren) {
+				@for (child of node().children; track $index) {
+					<app-command-output [node]="child"/>
+				}
+			}
+ 		</pre>
+	}
+	@case ('ul') {
+		<ul [ngClass]="node().className">
+			@if (shouldRenderChildren) {
+				@for (child of node().children; track $index) {
+					<app-command-output [node]="child"/>
+				}
+			}
+		</ul>
+	}
+	@case ('li') {
+		<li [ngClass]="node().className">
+			@if (shouldRenderText) {
+				{{ node().innerText }}
+			}
+			@if (shouldRenderChildren) {
+				@for (child of node().children; track $index) {
+					<app-command-output [node]="child"/>
+				}
+			}
+		</li>
+	}
+	@case ('a') {
+		<a [ngClass]="node().className"
+		   [href]="node().attributes ? node().attributes!['href']: null"
+		   [target]="node().attributes? node().attributes!['target']: null"
+		   [rel]="node().attributes? node().attributes!['rel']: null">
+			@if (shouldRenderText) {
+				{{ node().innerText }}
+			}
+			@if (shouldRenderChildren) {
+				@for (child of node().children; track $index) {
+					<app-command-output [node]="child"/>
+				}
+			}
+		</a>
+	}
+	@default {
+		<div [ngClass]="node().className">
+			@if (shouldRenderText) {
+				{{ node().innerText }}
+			}
+			@if (shouldRenderChildren) {
+				@for (child of node().children; track $index) {
+					<app-command-output [node]="child"/>
+				}
+			}
+		</div>
+	}
+}
