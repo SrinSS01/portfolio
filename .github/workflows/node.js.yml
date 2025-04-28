@@ -43,7 +43,7 @@ jobs:
         with:
           # IMPORTANT: Upload the correct build output folder
           # Replace <your-project-name> with the folder name inside dist/
-          path: ./dist/portfolio/browser
+          path: ./dist/portfolio
       - name: Deploy to GitHub Pages 🚀
         id: deployment
         uses: actions/deploy-pages@v4 # This action does the deployment
