@@ -33,7 +33,7 @@ jobs:
 
       - name: Build Angular App 🏗️
         # VERY IMPORTANT: Replace <repository-name> with your repo name!
-        run: npm run ng -- build --configuration production
+        run: npm run ng -- build --configuration production --base-href /portfolio/
 
       - name: Setup Pages ⚙️
         uses: actions/configure-pages@v4
@@ -43,7 +43,7 @@ jobs:
         with:
           # IMPORTANT: Upload the correct build output folder
           # Replace <your-project-name> with the folder name inside dist/
-          path: ./dist/portfolio
+          path: ./dist/portfolio/browser
       - name: Deploy to GitHub Pages 🚀
         id: deployment
         uses: actions/deploy-pages@v4 # This action does the deployment
