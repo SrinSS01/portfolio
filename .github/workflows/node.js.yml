@@ -33,7 +33,7 @@ jobs:
 
       - name: Build Angular App 🏗️
         # VERY IMPORTANT: Replace <repository-name> with your repo name!
-        run: npm run ng build --configuration production --base-href /portfolio/
+        run: npm run ng -- build --configuration production --base-href /portfolio/
 
       - name: Setup Pages ⚙️
         uses: actions/configure-pages@v4
