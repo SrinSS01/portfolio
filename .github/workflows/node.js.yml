@@ -8,23 +8,42 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
+    
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  
 jobs:
-  build:
-
+  build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run ng build --if-present
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4 # Checks out your repository code
+
+      - name: Use Node.js 18.x 🚀 # Or your preferred Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'npm' # Cache npm dependencies
+
+      - name: Install Dependencies ⚙️
+        run: npm ci # Use 'ci' for faster, reliable installs in CI
+
+      - name: Build Angular App 🏗️
+        # VERY IMPORTANT: Replace <repository-name> with your repo name!
+        run: ng build --configuration production --base-href /portfolio/
+
+      - name: Setup Pages ⚙️
+        uses: actions/configure-pages@v4
+
+      - name: Upload Artifact ⬆️
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # IMPORTANT: Upload the correct build output folder
+          # Replace <your-project-name> with the folder name inside dist/
+          path: ./dist/portfolio/
+      - name: Deploy to GitHub Pages 🚀
+        id: deployment
+        uses: actions/deploy-pages@v4 # This action does the deployment
